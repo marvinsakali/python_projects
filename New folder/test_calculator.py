@@ -1,6 +1,8 @@
 from calculator import square
 def main():
     test_positive()
+    test_negative()
+    test_zero()
 
 def test_positive():
     assert square(2) == 4
