@@ -1,28 +1,52 @@
 # Object Oriented programming
 # Creating a sample class of empoloyees in a company
+# import datetime
+
 
 class Employee:
     raise_amount = 1.04
+    num_of_employees = 0
 
     def __init__(self, first, last, pay):
         self.first = first
         self.last = last
         self.pay = pay
         self.email = (first + "." + last + "@jorajoh.com").lower()
+        Employee.num_of_employees += 1
 
+    @property
     def full_name(self):
         return '{} {}'.format(self.first, self.last)
+
+    @full_name.setter
+    def full_name(self, name):
+        first, last = name.split(" ")
+        self.firts = first
+        self.name = last
+
+    @classmethod
+    def set_raise_amount(cls, amt):
+        cls.raise_amount = amt
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
+    @staticmethod
+    def work_day(day):
+        if day.weekday() < 5:
+            print(f'{day} is working day')
+        else:
+            return
+
 
 class Developers(Employee):
-    raise_amount = 1.10
-
     def __init__(self, first, last, pay, language):
         super().__init__(first, last, pay)
         self.language = language
+
+    @classmethod
+    def set_raise_amount(cls, amt):
+        return super().set_raise_amount(amt)
 
 
 class Managers(Employee):
@@ -34,6 +58,10 @@ class Managers(Employee):
             self.employees = []
         else:
             self.employees = employees
+
+    @classmethod
+    def set_raise_amount(cls, amt):
+        return super().set_raise_amount(amt)
 
     def add_emps(self, emp):
         if emp not in self.employees:
@@ -48,11 +76,8 @@ class Managers(Employee):
             return (f"{i+1.} --> {emp.full_name()}")
 
 
+emp1 = Employee('Mercy', 'Wekesa', 50000)
 dev1 = Developers('Marvin', 'Sakali', 50000, 'python')
 mgn1 = Managers('Givens', 'Ogajo', 100000, [dev1])
-print(dev1.language)
-print(mgn1.email)
-print(dev1.pay)
-dev1.apply_raise()
-print(mgn1.pay)
-print(mgn1.show_employees())
+# Employee.full_name = 'Margaret Sakali'
+print(emp1.full_name)
