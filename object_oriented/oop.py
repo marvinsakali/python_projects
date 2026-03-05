@@ -11,18 +11,21 @@ class Employee:
         self.first = first
         self.last = last
         self.pay = pay
-        self.email = (first + "." + last + "@jorajoh.com").lower()
         Employee.num_of_employees += 1
 
     @property
     def full_name(self):
         return '{} {}'.format(self.first, self.last)
 
+    @property
+    def email(self):
+        return ("{}.{}@company.com").format(self.first, self.last)
+
     @full_name.setter
     def full_name(self, name):
         first, last = name.split(" ")
-        self.firts = first
-        self.name = last
+        self.first = first
+        self.last = last
 
     @classmethod
     def set_raise_amount(cls, amt):
@@ -30,6 +33,11 @@ class Employee:
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
+
+    @classmethod
+    def from_string(cls, data_str):
+        first, last, pay = data_str.split("-")
+        return cls(first, last, int(pay))
 
     @staticmethod
     def work_day(day):
@@ -77,7 +85,13 @@ class Managers(Employee):
 
 
 emp1 = Employee('Mercy', 'Wekesa', 50000)
-dev1 = Developers('Marvin', 'Sakali', 50000, 'python')
-mgn1 = Managers('Givens', 'Ogajo', 100000, [dev1])
-# Employee.full_name = 'Margaret Sakali'
-print(emp1.full_name)
+# dev1 = Developers('Marvin', 'Sakali', 50000, 'python')
+# mgn1 = Managers('Givens', 'Ogajo', 100000, [dev1])
+# emp3 = Employee.from_string('Val-Wekesa-50000')
+# # Employee.full_name = 'Margaret Sakali'
+# print(emp3.full_name)
+# print(emp3.email)
+
+
+# if __name__ == "__main__":
+#     main()

@@ -1,26 +1,26 @@
-from menu import *
-from grocery import *
+import menu
+import grocery
 
 budget = 0.0
 items = {}
-set_budget()
+groc = grocery.grocery()
+groc.set_budget()
+mnu = menu.menu()
 
 while True:
-    show_menu()
-    
-    choice = user_input_choice()
-    
+    mnu.show_menu()
+    choice = mnu.user_input_choice()
 
     if choice == "1":
-        add_items(items)
+        groc.add_items(items)
     elif choice == "2":
-        view_items(items)
+        groc.view_items(items)
     elif choice == "3":
-        remove_items(items)
+        groc.remove_items(items)
     elif choice == "4":
-        calculate_total(items)
+        groc.calculate_total(items)
     elif choice == "5":
-        apply_discount(items)
+        groc.apply_discount(items)
     elif choice == "6":
         print("Exiting...")
         break
